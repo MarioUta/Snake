@@ -19,11 +19,8 @@ private:
     int cx, cy;
     Node *head;
 
-    void remove(Node *node) {
-        if (node->next != nullptr)
-            remove(node->next);
-        delete node;
-    };
+    void remove(Node *node) ;
+
 public:
     Snake();
 

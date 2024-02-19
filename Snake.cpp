@@ -84,6 +84,12 @@ void Snake::eat() {
     extend->next = nullptr;
 };
 
+void Snake::remove(Node *node) {
+        if (node->next != nullptr)
+            remove(node->next);
+        delete node;
+    };
+
 Snake::~Snake() {
     remove(getHead());
 }
