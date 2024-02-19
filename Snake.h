@@ -16,8 +16,9 @@ class Snake {
 private:
     int direction;
     int x, y;
-    int cx,cy;
+    int cx, cy;
     Node *head;
+
     void remove(Node *node) {
         if (node->next != nullptr)
             remove(node->next);
@@ -26,45 +27,25 @@ private:
 public:
     Snake();
 
-    int getX() const {
-        return x;
-    }
-    int getY() const {
-        return y;
-    }
-    void move(int direction);
+    int getX() const;
 
-    void eat() {
-        Node * tail =getTail();
-        Node * extend= new Node;
-        extend->x=cx;
-        extend->y=cy;
-        tail->next=extend;
-        extend->prev=tail;
-        extend->next= nullptr;
-    };
+    int getY() const;
 
     int getCx() const;
 
     int getCy() const;
 
-    Node *getHead() const {
-        return head;
-    }
-
-    void setTail(int a,int b){
-        this->cx=a;
-        this->cy=b;
-    }
+    Node *getHead() const;
 
     int getDirection() const;
 
-    Node *getTail() const {
-        Node *tmp = head;
-        while (tmp->next != nullptr)
-            tmp = tmp->next;
-        return tmp;
-    }
+    Node *getTail() const;
+
+    void setTail(int a, int b);
+
+    void move(int direction);
+
+    void eat();
 
     ~Snake();
 };
