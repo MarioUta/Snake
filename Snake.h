@@ -19,7 +19,7 @@ private:
     int cx, cy;
     Node *head;
 
-    void remove(Node *node) ;
+    void remove(Node *node);
 
 public:
     Snake();

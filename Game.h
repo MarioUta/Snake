@@ -10,17 +10,20 @@
 #include <string>
 
 using namespace std;
+
 class Game {
-     Snake snake;
-     int appleX,appleY;
-     int score;
-     char board[26][26];
+private:
+    static Snake snake;
+    static int appleX, appleY;
+    static int score;
+    static char board[26][26];
+    static void getSnake();
+    static void render();
+    static bool step();
+
 public:
     Game();
-    void getSnake();
-    void render();
-    void start();
-    bool step();
+    static void start();
 
 };
 

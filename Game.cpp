@@ -6,8 +6,10 @@
 #include <cstdlib>
 #include <ctime>
 
-
-Game::Game() : snake() {}
+Snake Game::snake;
+int Game::appleX, Game::appleY;
+int Game::score;
+char Game::board[26][26];
 
 void Game::getSnake() {
     Node *node = snake.getHead();
@@ -25,6 +27,7 @@ void Game::render() {
             board[i][j] = ' ';
         }
     }
+
     getSnake();
 
     board[appleX][appleY] = '*';
@@ -35,7 +38,6 @@ void Game::render() {
     for (int i = 0; i <= 51; ++i) {
         cout << "_";
     }
-
 
     cout << endl;
     for (int i = 0; i < 26; ++i) {
@@ -70,9 +72,11 @@ bool Game::step() {
         node->y = node->prev->y;
         node = node->prev;
     }
+
     node->x = (node->x + snake.getX()) % 26;
     if (node->x == -1)
         node->x = 25;
+
     node->y = (node->y + snake.getY()) % 26;
     if (node->y == -1)
         node->y = 25;
@@ -84,12 +88,10 @@ bool Game::step() {
     if (board[node->x][node->y] == '*') {
         snake.eat();
         int apple = rand() % 625;
-        this->appleX = apple / 25;
-        this->appleY = apple % 25;
-        this->score++;
-
+        appleX = apple / 25;
+        appleY = apple % 25;
+        score++;
     }
-
     return true;
 }
 
@@ -107,14 +109,15 @@ void Game::start() {
     srand(time(0));
 
     int apple = rand() % 625;
-    this->appleX = apple / 25;
-    this->appleY = apple % 25;
-    this->score = 0;
+    appleX = apple / 25;
+    appleY = apple % 25;
+    score = 0;
 
     int ok = true;
     set_raw_mode(true);
     while (ok) {
         int ch = quick_read();
+
         if (ch == ERR);
         else if (ch == 'w') {
             if (snake.getDirection() != 2)
